@@ -1,0 +1,166 @@
+/* ==========================================================
+   Jeremiah Campbell | Music Education Portfolio
+   Colors are pulled from the stage photo: velvet-curtain blue,
+   tungsten lamp amber, and the butterscotch Telecaster.
+   Change a color once here and it updates everywhere.
+   ========================================================== */
+:root {
+  --curtain: #14205a;      /* deep stage blue */
+  --curtain-2: #1d3191;    /* lit curtain blue */
+  --lamp: #f2b24a;         /* tungsten amber, used on dark backgrounds */
+  --brass: #8a5410;        /* darker amber, used on light backgrounds */
+  --ink: #141b33;          /* body text */
+  --muted: #4a5170;
+  --mist: #eef0f5;         /* page background */
+  --card: #ffffff;
+  --line: #d5d9e6;
+
+  --display: "Gloock", Georgia, serif;
+  --body: "Albert Sans", system-ui, sans-serif;
+  --wrap: 68rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--mist);
+  color: var(--ink);
+  font: 400 1.0625rem/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--brass); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--lamp); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.1; margin: 0; }
+h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: .5rem; }
+h3 { font-size: 1.4rem; margin-bottom: .4rem; }
+p { margin: 0 0 1rem; }
+
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 50; background: var(--lamp); color: var(--ink); padding: .5rem 1rem; }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1.25rem; }
+
+/* ---------- Nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .85rem 1.25rem;
+  background: rgba(20, 32, 90, .94);
+  backdrop-filter: blur(8px);
+  color: #fff;
+}
+.nav-name { font-family: var(--display); font-size: 1.25rem; color: #fff; text-decoration: none; white-space: nowrap; }
+.nav nav { display: flex; gap: 1.25rem; overflow-x: auto; scrollbar-width: none; }
+.nav nav::-webkit-scrollbar { display: none; }
+.nav nav a { color: #dfe4f5; text-decoration: none; font-size: .95rem; font-weight: 500; white-space: nowrap; }
+.nav nav a:hover { color: var(--lamp); }
+@media (max-width: 640px) {
+  .nav { flex-direction: column; align-items: flex-start; gap: .35rem; padding: .7rem 1.25rem; }
+  .nav nav { width: 100%; gap: 1.1rem; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; background: var(--curtain); color: #fff; }
+.hero-photo { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 40% 60%; }
+.hero-text { padding: 2rem 1.25rem 2.5rem; }
+.hero h1 { font-size: clamp(3.25rem, 13vw, 7.5rem); letter-spacing: -.01em; }
+.hero-role { font-size: 1.25rem; margin: 1rem 0 .25rem; color: var(--lamp); }
+.hero-sub { color: #c9d0ea; margin: 0; }
+
+@media (min-width: 900px) {
+  .hero { height: min(92vh, 56rem); overflow: hidden; }
+  .hero-photo { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; object-position: 35% 55%; }
+  .hero::after {           /* deepen the curtain behind the name so it stays readable */
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(20,32,90,0) 35%, rgba(20,32,90,.55) 62%, rgba(14,22,64,.85) 100%);
+  }
+  .hero-text {
+    position: absolute; z-index: 1; right: 5vw; top: 22%;
+    max-width: 30rem; padding: 0; text-align: right;
+  }
+}
+
+/* ---------- Mission statement ---------- */
+.mission {
+  background: var(--curtain);
+  border-top: 1px solid rgba(242, 178, 74, .35);
+  padding: clamp(3rem, 8vw, 5.5rem) 1.25rem;
+}
+.mission blockquote {
+  max-width: 46rem; margin: 0 auto;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height: 1.3; text-align: center; color: #fff;
+}
+.mission blockquote.placeholder { color: #9aa5d1; font-size: clamp(1.25rem, 2.6vw, 1.6rem); }
+
+/* ---------- Sections ---------- */
+.section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+.section.alt { background: var(--card); }
+.lede { color: var(--muted); margin-bottom: 2rem; max-width: 40rem; }
+
+.about { display: grid; gap: 2rem; }
+.about-body { max-width: 38rem; font-size: 1.125rem; }
+.facts { margin: 0; display: grid; gap: 1rem; align-content: start; }
+.facts div { border-left: 3px solid var(--brass); padding-left: 1rem; }
+.facts dt { font-size: .9rem; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; }
+@media (min-width: 900px) {
+  .about { grid-template-columns: 1fr 1.6fr 1fr; align-items: start; }
+}
+
+/* Featured program */
+.feature {
+  background: var(--curtain); color: #fff;
+  padding: 2rem; border-radius: 6px; margin-bottom: 1.5rem;
+  border-left: 6px solid var(--lamp);
+}
+.feature h3 { font-size: 1.75rem; }
+.feature p { color: #dfe4f5; max-width: 40rem; margin: 0; }
+
+/* Artifact slots */
+.slots { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); }
+.item { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 1.5rem; }
+.section.alt .item { background: var(--mist); }
+.item.empty { border-style: dashed; background: transparent; color: var(--muted); }
+.section.alt .item.empty { background: transparent; }
+.item .meta { color: var(--muted); font-size: .92rem; }
+.video { position: relative; aspect-ratio: 16 / 9; margin-bottom: 1rem; border-radius: 4px; overflow: hidden; background: #000; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Coursework list */
+.courses { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.courses li {
+  display: grid; gap: .25rem 1.5rem; padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.courses .course { font-weight: 600; }
+.courses .term { color: var(--muted); }
+.courses li.empty { color: var(--muted); }
+.courses li.empty .course { font-weight: 500; }
+@media (min-width: 700px) { .courses li { grid-template-columns: 2fr 1fr 2fr; } }
+
+/* Buttons */
+.btn {
+  display: inline-block; padding: .75rem 1.4rem; border-radius: 999px;
+  background: var(--curtain); color: #fff; text-decoration: none; font-weight: 600;
+}
+.btn:hover { background: var(--curtain-2); }
+.btn.disabled { background: var(--line); color: var(--muted); pointer-events: none; }
+
+.cv { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+.cv .note { color: var(--muted); margin: 0; }
+
+/* ---------- Contact ---------- */
+.contact { background: var(--curtain); color: #fff; padding: clamp(3.5rem, 8vw, 5rem) 0 2rem; }
+.contact-list { list-style: none; padding: 0; margin: 1.5rem 0 3rem; display: grid; gap: 1.25rem; }
+.contact-list span { display: block; font-size: .9rem; color: #aab3db; }
+.contact-list a { color: var(--lamp); font-size: 1.15rem; word-break: break-word; }
+@media (min-width: 900px) { .contact-list { grid-template-columns: repeat(3, auto); justify-content: start; gap: 3rem; } }
+.fine { color: #8992bd; font-size: .85rem; margin: 0; }
